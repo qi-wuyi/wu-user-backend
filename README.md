@@ -8,7 +8,7 @@
 #### 技术选型
 
 ----
-Golang + Hertz + Gorm + viper + Mysql + Proto
+Golang + Hertz + Gorm  + Mysql + Proto
 
 #### 安装相关依赖
 ````  
