@@ -1,0 +1,5 @@
+new:
+	hz new -I idl -idl idl/user/user.proto
+
+update:
+	hz update -I idl -idl idl/user/user.proto

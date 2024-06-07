@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "/user";
+
+import "api.proto";
+
+
+message BaseResp{
+  int64 code = 1;
+  string msg = 2;
+}
+
+message User{
+  int64 UserId = 1;
+  string UserAccount = 2;
+  string UserAvatar = 3;
+  string UserProfile = 4;
+  string Tags = 5;
+  string UserRole = 6;
+  string CreatTime = 7;
+}
+
+message RegisterReq{
+  string UserAccount = 1;
+  string UserPassword = 2;
+  string CheckPassword = 3;
+}
+
+message RegisterResp{
+  BaseResp baseResp = 1;
+  int64 UserId = 2;
+}
+
+message LoginReq{
+  string UserAccount = 1;
+  string UserPassword = 2;
+}
+
+message LoginResp{
+  BaseResp baseResp = 1;
+  User user = 2;
+}
+
+message SearchReq{
+  string UserAccount = 1;
+}
+
+message SearchResp{
+  BaseResp baseResp = 1;
+  User user = 2;
+}
+
+message DeleteReq{
+  int64 UserId = 1;
+}
+
+message DeleteResp{
+  BaseResp baseResp = 1;
+}
+
+message GetCurrentUserReq{}
+
+message GetCurrentUserResp{
+  BaseResp baseResp = 1;
+  User user = 2;
+}
+
+message LogoutReq{}
+
+message LogoutResp{
+  BaseResp baseResp = 1;
+}
+
+service UserService{
+  //注册
+  rpc Register(RegisterReq) returns(RegisterResp){
+    option (api.post) = "/api/user/register";
+  }
+  //登录
+  rpc Login(LoginReq) returns(LoginResp){
+    option(api.post) = "/api/user/login";
+  }
+  //搜索
+  rpc Search(SearchReq) returns(SearchResp){
+    option(api.get) = "/api/user/search";
+  }
+  //删除
+  rpc Delete(DeleteReq) returns(DeleteResp){
+    option(api.post) = "/api/user/delete";
+  }
+  //获取当前用户信息
+  rpc GetCurrentUser(GetCurrentUserReq) returns(GetCurrentUserResp){
+    option(api.get) = "/api/user/current";
+  }
+  //登出
+  rpc Logout(LogoutReq) returns(LogoutResp){
+    option(api.post) = "/api/user/logout";
+  }
+}
